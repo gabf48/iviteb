@@ -4,22 +4,28 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.BasePage;
 
+import java.awt.*;
+
 public class LoginPage extends BasePage {
-    public LoginPage(WebDriver driver) {
+    public LoginPage(WebDriver driver) throws AWTException {
         super(driver);
     }
 
-    By emailField = By.id("email");
-    By passwordField = By.cssSelector("div.mb5 input");
-    By continueButton = By.cssSelector("[style=\"padding-top: 0.25em; padding-bottom: 0.32em;\"]");
+    By emailField = By.id("identifierId");
+    By passwordGoogleField = By.cssSelector("#password input");
+    By continueGoogleButton = By.cssSelector("#identifierNext > div > button span");
+    By continueGoogleButton1 = By.cssSelector("#passwordNext > div > button > span");
+    By loginGoogleButton = By.cssSelector("div.mt5 div.mb5.tc > div > span");
 
 
-    public void login(String username, String password){
+    public void login(String username, String password) throws InterruptedException {
         driver.get("https://auchanqa.myvtex.com/");
         driver.manage().window().maximize();
-        writeText(emailField, username);
-        click(continueButton);
-        writeText(passwordField,password);
-        click(continueButton);
+        click(loginGoogleButton);
+        Thread.sleep(2000);
+        writeText(emailField,username);
+        click(continueGoogleButton);
+        writeText(passwordGoogleField,password);
+        click(continueGoogleButton1);
     }
 }
