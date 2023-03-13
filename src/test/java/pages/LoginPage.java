@@ -1,4 +1,4 @@
-package auchan.pages;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,14 +18,18 @@ public class LoginPage extends BasePage {
     By loginGoogleButton = By.cssSelector("div.mt5 div.mb5.tc > div > span");
 
 
-    public void login(String username, String password) throws InterruptedException {
-        driver.get("https://auchanqa.myvtex.com/");
-        driver.manage().window().maximize();
+    public void login(String url, String username, String password) throws InterruptedException {
+        accessURL(url);
         click(loginGoogleButton);
         Thread.sleep(2000);
         writeText(emailField,username);
         click(continueGoogleButton);
         writeText(passwordGoogleField,password);
         click(continueGoogleButton1);
+    }
+
+    public void accessURL(String url){
+        driver.get(url);
+        driver.manage().window().maximize();
     }
 }

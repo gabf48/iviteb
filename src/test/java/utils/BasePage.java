@@ -36,9 +36,9 @@ public class BasePage {
         driver.findElement(elementBy).sendKeys(text);
     }
 
-    public void readText(By elementBy) {
+    public String readText(By elementBy) {
         waitVisibility(elementBy);
-        driver.findElement(elementBy).getText();
+        return driver.findElement(elementBy).getText();
     }
 
     public String readAttribute(By elementBy, String attribute) {
@@ -47,15 +47,15 @@ public class BasePage {
     }
 
     public void clickRandomElement(String selector) throws InterruptedException {
+        Thread.sleep(2500);
         zoomOut();
+        Thread.sleep(2500);
         List<WebElement> list =
                 driver.findElements(By.cssSelector(selector));
         int size = list.size();
-        int randNumber = ThreadLocalRandom.current().nextInt(0, size);
+        int randNumber = ThreadLocalRandom.current().nextInt(0, size-1);
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", list.get(randNumber));
-        WebElement html = driver.findElement(By.tagName("html"));
-        Thread.sleep(2000);
+        Thread.sleep(2500);
         list.get(randNumber).click();
         zoomIn();
     }
@@ -65,16 +65,21 @@ public class BasePage {
         jse.executeScript("scroll(0, 1000);");
     }
 
+    public void scrollUpOfThePage() {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("scroll(0, -1000);");
+    }
+
 
 
     public void zoomOut() throws InterruptedException {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 10; i++) {
             robot.keyPress(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_SUBTRACT);
             robot.keyRelease(KeyEvent.VK_SUBTRACT);
             robot.keyRelease(KeyEvent.VK_CONTROL);
         }
-        Thread.sleep(5000);
+        Thread.sleep(2500);
     }
 
     public void zoomIn() throws InterruptedException {
@@ -84,6 +89,6 @@ public class BasePage {
             robot.keyRelease(KeyEvent.VK_CONTROL);
             robot.keyRelease(KeyEvent.VK_ADD);
         }
-        Thread.sleep(5000);
+        Thread.sleep(2500);
     }
 }

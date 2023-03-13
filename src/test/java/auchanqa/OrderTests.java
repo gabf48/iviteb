@@ -1,6 +1,6 @@
-package auchan.tests;
+package auchanqa;
 
-import auchan.pages.*;
+import pages.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -12,8 +12,9 @@ import utils.GenerateRandom;
 import java.awt.*;
 import java.io.IOException;
 
-import static utils.Accounts.*;
-import static utils.Product.PRICE;
+import static constants.Accounts.*;
+import static constants.Environments.TESTING_ENVIRONMENT;
+import static constants.Product.PRICE;
 
 public class OrderTests extends BaseTest {
 
@@ -43,14 +44,14 @@ public class OrderTests extends BaseTest {
     @Test
     public void orderTest() throws InterruptedException {
         //login with Google account
-        loginPage.login(VALID_EMAIL,VALID_PASSWORD);
+        loginPage.login(TESTING_ENVIRONMENT, VALID_EMAIL,VALID_PASSWORD);
         Thread.sleep(5000);
 
         //deschide pagian de produse electrocasnice
         driver.get("https://auchanqa.myvtex.com/electrocasnice-hitech-multimedia/electrocasnice-mici/c");
         Thread.sleep(5000);
 
-        //adauga un produs random in cos
+        //deschide pagina unui produs random
         basePage.clickRandomElement(".vtex-product-summary-2-x-imageWrapper--defaultShelf div");
 
         //memoreza si afiseaza pretul produsului deschis

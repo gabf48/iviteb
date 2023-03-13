@@ -41,6 +41,7 @@ public class BaseTest {
         chromeOptions.addArguments("--proxy-server='direct://'");
         chromeOptions.addArguments("--proxy-bypass-list=*");
         chromeOptions.addArguments("--ignore-certificate-errors");
+        chromeOptions.addArguments("--log-level=1");
 
         try {
             Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe /T");
